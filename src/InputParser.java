@@ -22,7 +22,7 @@ import org.xml.sax.SAXException;
 public class InputParser
 {
     private Document doc = null;
-
+    private List<Event> EventList;
 
     public InputParser ()
     {
@@ -35,13 +35,18 @@ public class InputParser
             for(int i=0; i<nl.getLength();i++){
             	EventList.add(parseEvent(nl.item(i)));
             }
+            this.EventList = EventList;
         }
         catch (Exception error)
         {
             error.printStackTrace();
         }
     }
-
+    
+    public List<Event> getListOfEvents(){
+    	return EventList;    	
+    }
+    
     public Event parseEvent(Node node){
 		NamedNodeMap nnm = node.getAttributes();
 		Stack<Node> stack = new Stack<Node>();
@@ -149,24 +154,6 @@ public class InputParser
     	   	
     	
     }
-    public void visit (Node node, int level, List<Event> Events)
-    {
-        NodeList nl = node.getChildNodes();
-        
-        Event event = new Event();
-
-        for (int i = 0, cnt = nl.getLength(); i < cnt; i++)
-        {
-            String nodeName = nl.item(i).getNodeName();
-        	String nodeText = nl.item(i).getTextContent();
-            
-            for(int j=0; j<level;j++) System.out.print("\t");
-        	System.out.println("[" + nl.item(i) + "]");
-
-            visit(nl.item(i), level + 1, Events);
-        }
-    }
-
 
     public Document parserXML (File file)
         throws SAXException,
@@ -178,9 +165,4 @@ public class InputParser
                                      .parse(file);
     }
 
-
-    public static void main (String[] args)
-    {
-        new InputParser();
-    }
 }

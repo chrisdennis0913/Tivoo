@@ -1,9 +1,11 @@
 Hey guys,
 
-I implemented the class 'InputParser', and it should work now, but let me know if you try to use it and it doesnt. To use it, just instantiate a new InputParser and then call the getListOfEvents method.
+I implemented the class 'InputParser', and it should work now, but let me know if you try to use it and it doesnt. 
+To use it, just instantiate a new InputParser and then call the getListOfEvents method.
 
     InputParser parser = new InputParser();
     List<Event> eventList = parser.getListOfEvents();
 
 
-Its not pretty inside the class but it should work for the prototype.  The List<Event> returned should have Events that are fully populated based on the DukeBasketBall.xml file.
+Its not pretty inside the class but it should work for the prototype.  The List<Event> returned should have Events
+that are fully populated based on the DukeBasketBall.xml file.

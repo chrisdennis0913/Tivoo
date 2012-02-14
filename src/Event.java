@@ -3,19 +3,23 @@ import java.util.GregorianCalendar;
 
 public class Event
 {
-    private String mySubject;
-    private GregorianCalendar myStart;
-    private GregorianCalendar myEnd;
+    public String mySubject;
+    public GregorianCalendar myStart;
+    public GregorianCalendar myEnd;
+    public boolean myIsAllDayEvent;
     // deal with all day events
-    private String myDescription;
-    private String myLocation;
-    private String myPriority; // level like low
-    private String myPrivacy; // yes or no
-    private String myReminderOnOff; // on or off
-    private GregorianCalendar myReminder;
-    private String mySensitivity; // a level like normal
-    private String myShowTimeAs; // no clue, but normally 2
+    public String myDescription;
+    public String myLocation;
+    public String myPriority; // level like low
+    public String myPrivacy; // yes or no
+    public String myReminderOnOff; // on or off
+    public GregorianCalendar myReminder;
+    public String mySensitivity; // a level like normal
+    public String myShowTimeAs; // no clue, but normally 2
 
+    public Event(){
+    
+    }
 
     public Event (String subject,
                   int startYear,

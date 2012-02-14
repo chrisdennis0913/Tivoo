@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 
 public class Processor {
-	public ArrayList<Event> timeFrameFinder (ArrayList<Event> myEvents, GregorianCalendar start, GregorianCalendar end){
+	public List<Event> timeFrameFinder (List<Event> myEvents, GregorianCalendar start, GregorianCalendar end){
 		ArrayList<Event> timeList = new ArrayList<Event> ();
 		
 		for (Event e: myEvents){
@@ -14,7 +15,7 @@ public class Processor {
 		return timeList;
 	}
 	
-	public ArrayList<Event> keywordFinder (ArrayList<Event> myEvents, String keyword){
+	public List<Event> keywordFinder (List<Event> myEvents, String keyword){
 		ArrayList<Event> keyList = new ArrayList<Event> ();
 		
 		for (Event e: myEvents){
@@ -23,6 +24,18 @@ public class Processor {
 			}
 		}
 		return keyList; 
+	}
+	
+	public static void main (String[] args){
+		InputParser input = new InputParser(); 
+		
+		List<Event> listofEvents = input.getListOfEvents();
+		Processor process = new Processor ();
+		
+		List<Event> returnList = process.keywordFinder(listofEvents, "Duke");
+		for (Event e: returnList){
+			System.out.println (e.getSubject());
+		}
 	}
 	
 }

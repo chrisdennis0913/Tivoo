@@ -1,41 +1,24 @@
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 
 public class Processor {
-	public List<Event> timeFrameFinder (List<Event> myEvents, GregorianCalendar start, GregorianCalendar end){
-		ArrayList<Event> timeList = new ArrayList<Event> ();
+	private FinderFactory factory = new FinderFactory(); 
+	private KeyWordFinder keywordF; 
+	private TimeFrameFinder timeframeF; 
+	
+	public List<Event> findByKeyWord (List<Event> myEvents, String keyword){
+		if (keywordF==null)
+			keywordF = factory.CreateKeyWordFinder(); 
 		
-		for (Event e: myEvents){
-			if ( (e.getStartDate().getTimeInMillis() >= start.getTimeInMillis()) && 
-					(e.getStartDate().getTimeInMillis() <= end.getTimeInMillis()) )
-				timeList.add(e);
-		}
-		return timeList;
+		return keywordF.keywordFinder(myEvents, keyword);  
 	}
 	
-	public List<Event> keywordFinder (List<Event> myEvents, String keyword){
-		ArrayList<Event> keyList = new ArrayList<Event> ();
+	public List<Event> findByKeyWord (List<Event> myEvents, GregorianCalendar start, GregorianCalendar end){
+		if (timeframeF==null)
+			timeframeF = factory.CreateTimeFrameFinder();
 		
-		for (Event e: myEvents){
-			if (e.getSubject().startsWith(keyword)){
-				keyList.add(e);
-			}
-		}
-		return keyList; 
-	}
-	
-	public static void main (String[] args){
-		InputParser input = new InputParser(); 
-		
-		List<Event> listofEvents = input.getListOfEvents();
-		Processor process = new Processor ();
-		
-		List<Event> returnList = process.keywordFinder(listofEvents, "Duke");
-		for (Event e: returnList){
-			System.out.println (e.getSubject());
-		}
+		return timeframeF.timeFrameFinder(myEvents, start, end);  
 	}
 	
 }
